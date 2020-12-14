@@ -1,0 +1,33 @@
+.repository-item {
+  padding: 16px;
+  border: 1px solid #ddd;
+  margin: 16px;
+
+  &__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    &__repo-name {
+      font-size: 20px;
+      font-weight: 600;
+      color: #3f51b5;
+    }
+
+    &__owner {
+      font-size: 20px;
+    }
+  }
+
+  &__footer {
+    display: flex;
+    justify-content: space-between;
+    &__stars-count {
+      background: #e0f2f1;
+      padding: 8px;
+      font-weight: 600;
+      border: 1px solid #009688;
+      border-radius: 4px;
+    }
+  }
+}
