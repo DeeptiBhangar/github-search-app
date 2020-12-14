@@ -1,14 +1,41 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
-import reportWebVitals from './reportWebVitals';
+import React from "react";
+import ReactDOM from "react-dom";
+import "./index.scss";
+import App from "./App";
+import reportWebVitals from "./reportWebVitals";
+import {
+  ApolloProvider,
+  createHttpLink,
+  ApolloClient,
+  InMemoryCache,
+} from "@apollo/client";
+import { setContext } from "@apollo/client/link/context";
+
+const httpLink = createHttpLink({
+  uri: process.env.REACT_APP_GIT_HUB_API_URL,
+});
+
+const authLink = setContext((_, { headers }) => {
+  return {
+    headers: {
+      ...headers,
+      Authorization: "bearer b6e6a61d32bc3ae7f2cb127a282db35519f61988",
+    },
+  };
+});
+
+const client = new ApolloClient({
+  link: authLink.concat(httpLink),
+  cache: new InMemoryCache(),
+});
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <ApolloProvider client={client}>
+      <App />
+    </ApolloProvider>
   </React.StrictMode>,
-  document.getElementById('root')
+  document.getElementById("root")
 );
 
 // If you want to start measuring performance in your app, pass a function
